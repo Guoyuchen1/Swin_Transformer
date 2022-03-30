@@ -27,7 +27,7 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
     if checkpoint['model']['head.weight'].shape[0] == 1000:
         checkpoint['model']['head.weight'] = torch.nn.Parameter(
               torch.nn.init.xavier_uniform(torch.empty(config.MODEL.NUM_CLASSES, 768)))
-        checkpoint['model']['head.bias'] = torch.nn.Parameter(torch.randn(config.MODELNUM_CLASSES))
+        checkpoint['model']['head.bias'] = torch.nn.Parameter(torch.randn(config.MODEL.NUM_CLASSES))
 
 
     msg = model.load_state_dict(checkpoint['model'], strict=False)
