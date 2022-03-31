@@ -169,12 +169,14 @@ def train_one_epoch(config, model, criterion, data_loader, optimizer, epoch, mix
     for idx, (samples, targets) in enumerate(data_loader):
         samples = samples.cuda(non_blocking=True)
         targets = targets.cuda(non_blocking=True)
-
+        print("samples:")
+        print(samples)
         if mixup_fn is not None:
             samples, targets = mixup_fn(samples, targets)
 
         outputs = model(samples)
-
+        print("outputs:")
+        print(outputs)
         if config.TRAIN.ACCUMULATION_STEPS > 1:
             loss = criterion(outputs, targets)
             loss = loss / config.TRAIN.ACCUMULATION_STEPS
